@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul_stage1 IS
-   PORT( 
+   PORT(
       FP_A            : IN     std_logic_vector (31 DOWNTO 0);
       FP_B            : IN     std_logic_vector (31 DOWNTO 0);
       clk             : IN     std_logic;
@@ -54,7 +54,7 @@ ARCHITECTURE struct OF FPmul_stage1 IS
 
    -- Architecture declarations
       -- Non hierarchical truthtable declarations
-    
+
 
 
    -- Internal signal declarations
@@ -86,7 +86,7 @@ ARCHITECTURE struct OF FPmul_stage1 IS
       isNaN : OUT    std_logic ;
       isINF : OUT    std_logic ;
       isZ   : OUT    std_logic ;
-      isDN  : OUT    std_logic 
+      isDN  : OUT    std_logic
    );
    END COMPONENT;
 
@@ -100,7 +100,7 @@ BEGIN
    -- Architecture concurrent statements
    -- HDL Embedded Text Block 1 latch
    -- latch 1
-   
+
    PROCESS(clk)
    BEGIN
       IF RISING_EDGE(clk) THEN
@@ -167,7 +167,7 @@ BEGIN
    END PROCESS exceptions_truth_process;
 
    -- Architecture concurrent statements
-    
+
 
 
 

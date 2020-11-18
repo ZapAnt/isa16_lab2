@@ -15,10 +15,10 @@ USE ieee.std_logic_unsigned.all;
 
 
 ENTITY FPnormalize IS
-   GENERIC( 
+   GENERIC(
       SIG_width : integer := 28
    );
-   PORT( 
+   PORT(
       SIG_in  : IN     std_logic_vector (SIG_width-1 DOWNTO 0);
       EXP_in  : IN     std_logic_vector (7 DOWNTO 0);
       SIG_out : OUT    std_logic_vector (SIG_width-1 DOWNTO 0);

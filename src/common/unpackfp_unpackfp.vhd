@@ -13,7 +13,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY UnpackFP IS
-   PORT( 
+   PORT(
       FP    : IN     std_logic_vector (31 DOWNTO 0);
       SIG   : OUT    std_logic_vector (31 DOWNTO 0);
       EXP   : OUT    std_logic_vector (7 DOWNTO 0);

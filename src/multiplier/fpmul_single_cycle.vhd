@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul IS
-   PORT( 
+   PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
       clk  : IN     std_logic;
@@ -46,7 +46,7 @@ ARCHITECTURE single_cycle OF FPmul IS
 
    -- Architecture declarations
       -- Non hierarchical truthtable declarations
-    
+
 
 
    -- Internal signal declarations
@@ -126,7 +126,7 @@ ARCHITECTURE single_cycle OF FPmul IS
       isNaN : OUT    std_logic ;
       isINF : OUT    std_logic ;
       isZ   : OUT    std_logic ;
-      isDN  : OUT    std_logic 
+      isDN  : OUT    std_logic
    );
    END COMPONENT;
 
@@ -146,8 +146,8 @@ BEGIN
    SIG_in <= prod(47 DOWNTO 20);
 
    -- HDL Embedded Text Block 2 eb2
-   -- eb2 
-   
+   -- eb2
+
    SIG_out <= SIG_out_norm2(25 DOWNTO 3);
 
    -- HDL Embedded Text Block 3 eb3
@@ -221,7 +221,7 @@ BEGIN
    END PROCESS eb4_truth_process;
 
    -- Architecture concurrent statements
-    
+
 
 
    -- HDL Embedded Text Block 5 eb5
@@ -232,8 +232,8 @@ BEGIN
    -- eb6 6
    PROCESS(SIG_out_norm2,A_EXP,B_EXP, EXP_out)
    BEGIN
-      IF ( EXP_out(7)='1' AND 
-		    ( (A_EXP(7)='0' AND NOT (A_EXP=X"7F")) AND 
+      IF ( EXP_out(7)='1' AND
+		    ( (A_EXP(7)='0' AND NOT (A_EXP=X"7F")) AND
 			   (B_EXP(7)='0' AND NOT (B_EXP=X"7F")) ) ) OR
          (SIG_out_norm2(26 DOWNTO 3)=X"000000") THEN
          -- Underflow or zero significand

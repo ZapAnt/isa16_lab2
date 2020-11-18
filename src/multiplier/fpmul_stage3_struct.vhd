@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul_stage3 IS
-   PORT( 
+   PORT(
       EXP_in          : IN     std_logic_vector (7 DOWNTO 0);
       EXP_neg_stage2  : IN     std_logic;
       EXP_pos_stage2  : IN     std_logic;

@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul_stage2 IS
-   PORT( 
+   PORT(
       A_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       A_SIG           : IN     std_logic_vector (31 DOWNTO 0);
       B_EXP           : IN     std_logic_vector (7 DOWNTO 0);
@@ -83,7 +83,7 @@ BEGIN
 
    -- HDL Embedded Text Block 3 latch
    -- eb2 2
-   
+
    PROCESS(clk)
    BEGIN
       IF RISING_EDGE(clk) THEN

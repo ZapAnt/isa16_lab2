@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul_stage4 IS
-   PORT( 
+   PORT(
       EXP_neg       : IN     std_logic;
       EXP_out_round : IN     std_logic_vector (7 DOWNTO 0);
       EXP_pos       : IN     std_logic;
@@ -96,12 +96,12 @@ ARCHITECTURE struct OF FPmul_stage4 IS
 BEGIN
    -- Architecture concurrent statements
    -- HDL Embedded Text Block 1 trim
-   -- trim 1 
+   -- trim 1
    SIG_out <= SIG_out_norm2(25 DOWNTO 3);
 
    -- HDL Embedded Text Block 2 zero
    -- zero 2
-   SIG_isZ <= '1' WHEN ((SIG_out_norm2(26 DOWNTO 3)=X"000000") OR 
+   SIG_isZ <= '1' WHEN ((SIG_out_norm2(26 DOWNTO 3)=X"000000") OR
    (EXP_neg='1' AND EXP_out(7)='1')) ELSE '0';
 
    -- HDL Embedded Text Block 3 isINF_logic

@@ -14,7 +14,7 @@ USE ieee.std_logic_arith.all;
 
 
 ENTITY PackFP IS
-   PORT( 
+   PORT(
       SIGN  : IN     std_logic;
       EXP   : IN     std_logic_vector (7 DOWNTO 0);
       SIG   : IN     std_logic_vector (22 DOWNTO 0);
@@ -47,7 +47,7 @@ BEGIN
 		FP(31) <= SIGN;
 		FP(30 DOWNTO 23) <= X"00";
 		FP(22 DOWNTO 0) <= (OTHERS => '0');
-    ELSE	
+    ELSE
 		FP(31) <= SIGN;
 		FP(30 DOWNTO 23) <= EXP;
 		FP(22 DOWNTO 0) <= SIG;

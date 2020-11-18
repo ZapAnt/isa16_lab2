@@ -14,7 +14,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY FPmul IS
-   PORT( 
+   PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
       clk  : IN     std_logic;
@@ -86,7 +86,7 @@ ARCHITECTURE pipeline OF FPmul IS
       SIGN_out_stage1 : OUT    std_logic ;
       isINF_stage1    : OUT    std_logic ;
       isNaN_stage1    : OUT    std_logic ;
-      isZ_tab_stage1  : OUT    std_logic 
+      isZ_tab_stage1  : OUT    std_logic
    );
    END COMPONENT;
    COMPONENT FPmul_stage2
@@ -107,7 +107,7 @@ ARCHITECTURE pipeline OF FPmul IS
       SIG_in          : OUT    std_logic_vector (27 DOWNTO 0);
       isINF_stage2    : OUT    std_logic ;
       isNaN_stage2    : OUT    std_logic ;
-      isZ_tab_stage2  : OUT    std_logic 
+      isZ_tab_stage2  : OUT    std_logic
    );
    END COMPONENT;
    COMPONENT FPmul_stage3
@@ -128,7 +128,7 @@ ARCHITECTURE pipeline OF FPmul IS
       SIG_out_round   : OUT    std_logic_vector (27 DOWNTO 0);
       isINF_tab       : OUT    std_logic ;
       isNaN           : OUT    std_logic ;
-      isZ_tab         : OUT    std_logic 
+      isZ_tab         : OUT    std_logic
    );
    END COMPONENT;
    COMPONENT FPmul_stage4
