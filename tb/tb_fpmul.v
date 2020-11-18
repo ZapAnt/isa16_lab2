@@ -3,7 +3,7 @@
 module tb_fpmul;
 
 	wire CLK_i;
-	wire SMPL_END_i;
+	wire SMPL_STAT_i;
 	wire [31:0] DATA_in;
 	wire [31:0] DATA_out;
 
@@ -14,7 +14,7 @@ module tb_fpmul;
 	data_maker DM (
 		.CLK(CLK_i),
 		.DATA_OUT(DATA_in),
-		.SMPL_END(SMPL_END_i)
+		.SMPL_STAT(SMPL_STAT_i)
 	);
 
 	FPmul UUT (
@@ -27,7 +27,7 @@ module tb_fpmul;
 	data_sink DS (
 		.CLK(CLK_i),
 		.DATA_IN(DATA_out),
-		.SMPL_END(SMPL_END_i)
+		.SMPL_STAT(SMPL_STAT_i)
 	);
 
 endmodule

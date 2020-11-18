@@ -10,24 +10,28 @@ ENTITY data_sink IS
 	PORT (
 		CLK 		: IN std_logic;
 		DATA_IN    	: IN signed(31 DOWNTO 0);
-		SMPL_END 	: IN std_logic;
+		SMPL_STAT 	: IN std_logic
 	);
 END data_sink;
 
 ARCHITECTURE beh OF data_sink IS
 
+	CONSTANT	delay		: integer := 4;
+
 BEGIN
 
-	PROCESS(CLK, RST_n)
+	PROCESS(CLK)
 		VARIABLE	line_out 	: line;
-		FILE 		res_fp 		: text OPEN WRITE_MODE IS "fp_prod_results.hex";
+		VARIABLE	delayed_sig	: std_logic_vector(delay DOWNTO 0);
+		FILE 		res_fp 		: text OPEN WRITE_MODE IS "../tb/fp_prod_results.hex";
 
 	BEGIN
-		IF (SMPL_END = '0') THEN
-			write(line_out, to_integer(DIN));
-			writeline(res_fp, line_out);
-		ELSE
-	 		file_close(res_fp);
+		IF CLK'event and CLK = '1' THEN
+			delayed_sig := SMPL_STAT & delayed_sig(delay DOWNTO 1);
+			IF (delayed_sig(0) = '1') THEN
+				hwrite(line_out, std_logic_vector(DATA_IN));
+				writeline(res_fp, line_out);
+			END IF;
 		END IF;
 	END PROCESS;
 

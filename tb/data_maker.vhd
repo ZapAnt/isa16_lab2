@@ -11,7 +11,7 @@ ENTITY data_maker IS
  	PORT (
 		CLK 		: IN  std_logic;
 		DATA_OUT	: OUT std_logic_vector(31 downto 0);
-		SMPL_END	: OUT std_logic
+		SMPL_STAT	: OUT std_logic
 	);
 END data_maker;
 
@@ -20,21 +20,21 @@ ARCHITECTURE beh OF data_maker IS
 BEGIN
 
 	PROCESS(CLK)
-		FILE fp 				: text OPEN read_mode IS "fp_samples.hex";
+		FILE fp 				: text OPEN READ_MODE IS "../tb/fp_samples.hex";
 		VARIABLE ptr			: line;
 		VARIABLE val 			: std_logic_vector(31 downto 0);
-		VARIABLE smpl_end_var	: std_logic;
+		VARIABLE smpl_stat_var	: std_logic:='0';
 	BEGIN
 		IF CLK'event and CLK = '1' THEN
 			IF (NOT(endfile(fp))) THEN
 				readline(fp, ptr);
 				hread(ptr, val);
-				smpl_end_var := '0';
+				smpl_stat_var := '1';
 			ELSE
-				smpl_end_var := '1';
+				smpl_stat_var := '0';
 			END IF;
 			DATA_OUT <= val;
-			SMPL_END <= smpl_end_var;
+			SMPL_STAT <= smpl_stat_var;
 		END IF;
 	END PROCESS;
 
