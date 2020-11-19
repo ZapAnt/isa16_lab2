@@ -1,3 +1,8 @@
 quartus_pipeline_proj/*
 sim/work/*
 sim/vsim.wlf
+syn/work/*
+syn/command.log
+syn/default.svf
+syn/filenames.log
+syn/.synopsys_dc.setup
