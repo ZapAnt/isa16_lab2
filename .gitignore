@@ -1,1 +1,3 @@
-quartus_pipeline_proj
+quartus_pipeline_proj/*
+sim/work/*
+sim/vsim.wlf

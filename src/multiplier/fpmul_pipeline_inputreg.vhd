@@ -42,7 +42,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ARCHITECTURE pipeline OF FPmul IS
+ARCHITECTURE pipeline_inputreg OF FPmul IS
 
    -- Architecture declarations
 
@@ -255,4 +255,4 @@ BEGIN
          FP_Z          => FP_Z
       );
 
-END pipeline;
+END pipeline_inputreg;

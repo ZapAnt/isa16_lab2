@@ -25,7 +25,7 @@ add wave -noupdate -radix hexadecimal /tb_fpmul/DM/*
 add wave -noupdate -divider {UUT}
 add wave -noupdate -radix hexadecimal /tb_fpmul/UUT/*
 add wave -noupdate -divider {Data Sink}
-add wave -noupdate -radix decimal /tb_fpmul/DS/*
+add wave -noupdate -radix hexadecimal /tb_fpmul/DS/*
 configure wave -timelineunits ns
 update
 
