@@ -20,7 +20,7 @@ ARCHITECTURE beh OF data_maker IS
 BEGIN
 
 	PROCESS(CLK)
-		FILE fp 				: text OPEN READ_MODE IS "../tb/fp_samples.hex";
+		FILE fp 				: text OPEN READ_MODE IS "../sim/fp_samples.hex";
 		VARIABLE ptr			: line;
 		VARIABLE val 			: std_logic_vector(31 downto 0);
 		VARIABLE smpl_stat_var	: std_logic:='0';

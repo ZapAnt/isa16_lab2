@@ -11,9 +11,10 @@ vcom -work work {../src/multiplier/fpmul_stage3_struct.vhd}
 vcom -work work {../src/multiplier/fpmul_stage4_struct.vhd}
 vcom -work work {../tb/clock_gen.vhd}
 vcom -work work {../tb/data_maker.vhd}
-vcom -work work {../tb/data_sink.vhd}
+vcom -work work {../tb/data_sink_inputreg.vhd}
+vcom -work work {../src/reg_nbit.vhd}
 
-vcom -work work {../src/multiplier/fpmul_pipeline.vhd}
+vcom -work work {../src/multiplier/fpmul_pipeline_inputreg.vhd}
 vlog -work work {../tb/tb_fpmul.v}
 vsim work.tb_fpmul
 
