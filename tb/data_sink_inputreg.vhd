@@ -16,14 +16,14 @@ END data_sink;
 
 ARCHITECTURE beh OF data_sink IS
 
-	CONSTANT	delay		: integer := 4; --pipeline fpmul
+	CONSTANT	delay		: integer := 5; --pipeline fpmul with input regs
 
 BEGIN
 
 	PROCESS(CLK)
 		VARIABLE	line_out 	: line;
 		VARIABLE	delayed_sig	: std_logic_vector(delay DOWNTO 0);
-		FILE 		res_fp 		: text OPEN WRITE_MODE IS "../sim/fp_prod_results.hex";
+		FILE 		res_fp 		: text OPEN WRITE_MODE IS "../sim/fp_prod_results_inputreg.hex";
 
 	BEGIN
 		IF CLK'event and CLK = '1' THEN
