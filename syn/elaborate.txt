@@ -1,5 +1,9 @@
 Running PRESTO HDLC
 Presto compilation completed successfully.
+Warning: Overwriting design file '/home/isa16/lab2/isa16_lab2/syn/FPmul.db'. (DDB-24)
+Warning: Overwriting design file '/home/isa16/lab2/isa16_lab2/syn/FPmul.db'. (DDB-24)
+Warning: Overwriting design file '/home/isa16/lab2/isa16_lab2/syn/FPmul.db'. (DDB-24)
+Warning: Overwriting design file '/home/isa16/lab2/isa16_lab2/syn/FPmul.db'. (DDB-24)
 Elaborated 1 design.
 Current design is now 'FPmul'.
 Information: Building the design 'REG' instantiated from design 'FPmul' with
