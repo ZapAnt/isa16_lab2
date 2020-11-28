@@ -122,7 +122,7 @@ for pp in range(0, pps_per_level[6]):
 	if pp == 0:									# pp0
 		for cpos in range(0, 64):
 			if cpos < 33:
-				bit[6][pp][cpos] = "l6_p0_b" + str(cpos)
+				bit[6][pp][cpos] = "p0_b" + str(cpos)
 			elif cpos < 36:
 				if cpos == 33 or cpos == 34:
 					bit[6][pp][cpos] = 'S0'
@@ -131,12 +131,12 @@ for pp in range(0, pps_per_level[6]):
 	elif pp == pps_per_level[6]-1:				# pp16
 		for cpos in range(0, 64):
 			if cpos >= 32:
-				bit[6][pp][cpos] = "l6_p" + str(pp) + "_b" + str(cpos-2*pp)
+				bit[6][pp][cpos] = "p" + str(pp) + "_b" + str(cpos-2*pp)
 		bit[6][pp][2*(pp-1)] = "S" + str(pp-1)
 	else:										# pp1 to pp15
 		for cpos in range(0, 64):
 			if 2*pp <= cpos <= 2*pp + 32:
-				bit[6][pp][cpos] = "l6_p" + str(pp) + "_b" + str(cpos-2*pp)
+				bit[6][pp][cpos] = "p" + str(pp) + "_b" + str(cpos-2*pp)
 			elif cpos == 2*pp + 33:
 				bit[6][pp][cpos] = 'S' + str(pp) + '_neg'
 			elif cpos == 2*pp + 34 and pp != 15:
