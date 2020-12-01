@@ -7,7 +7,7 @@ ENTITY mbe IS
 		A,B		: IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
 		P 		: OUT 	STD_LOGIC_VECTOR(63 DOWNTO 0)
 	);
-END mbe ;
+END mbe;
 
 ARCHITECTURE struct OF mbe IS
 
@@ -5985,8 +5985,10 @@ BEGIN
 		);
 
 	final_sum : PROCESS (IN1_sum, IN2_sum)
+	VARIABLE ptemp : UNSIGNED(63 DOWNTO 0);
 	BEGIN
-		P <= IN1_sum + IN2_sum;
+		ptemp 	:= (unsigned(IN1_sum) + unsigned(IN2_sum));
+		P 		<= std_logic_vector(ptemp);
 	END PROCESS final_sum;
 
 END struct;
