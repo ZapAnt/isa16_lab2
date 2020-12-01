@@ -1,3 +1,5 @@
+import os
+
 ###FUNCTIONS###
 def need_adders(l, cpos):		#l is the level which needs adders
 	count_non_empty = 0
@@ -67,26 +69,30 @@ def generate_values(l, cpos):	# l is the level in which we generate values
 
 def generate_FA_vhdl(num, l, col, A, B, C, SUM, COUT):
 	name = "FA" + str(num) + "_l" + str(l) + "_c" + str(col)
-	outfile.write(name + '''	:	full_adder
-	PORT MAP (
-		A 		=>	''' + A + ''',
-		B 		=>	''' + B + ''',
-		CIN 	=>	''' + C + ''',
-		S 		=>	''' + SUM + ''',
-		COUT 	=>	''' + COUT + '''
-	);
+	outfile1.write("	SIGNAL " + SUM + "		: STD_LOGIC;\n")
+	outfile1.write("	SIGNAL " + COUT + "	: STD_LOGIC;\n")
+	outfile2.write("	" + name + '''	:	full_adder
+		PORT MAP (
+			A 		=>	''' + A + ''',
+			B 		=>	''' + B + ''',
+			CIN 	=>	''' + C + ''',
+			S 		=>	''' + SUM + ''',
+			COUT 	=>	''' + COUT + '''
+		);
 
 ''')
 
 def generate_HA_vhdl(num, l, col, A, B, SUM, COUT):
 	name = "HA" + str(num) + "_l" + str(l) + "_c" + str(col)
-	outfile.write(name + '''	:	half_adder
-	PORT MAP (
-		A 		=>	''' + A + ''',
-		B 		=>	''' + B + ''',
-		S 		=>	''' + SUM + ''',
-		COUT 	=>	''' + COUT + '''
-	);
+	outfile1.write("	SIGNAL " + SUM + "		: STD_LOGIC;\n")
+	outfile1.write("	SIGNAL " + COUT + "	: STD_LOGIC;\n")
+	outfile2.write("	" + name + '''	:	half_adder
+		PORT MAP (
+			A 		=>	''' + A + ''',
+			B 		=>	''' + B + ''',
+			S 		=>	''' + SUM + ''',
+			COUT 	=>	''' + COUT + '''
+		);
 
 ''')
 
@@ -125,54 +131,222 @@ for pp in range(0, pps_per_level[6]):
 				bit[6][pp][cpos] = "pp0(" + str(cpos) + ")"
 			elif cpos < 36:
 				if cpos == 33 or cpos == 34:
-					bit[6][pp][cpos] = 'S0'
+					bit[6][pp][cpos] = 'pp0(32)'
 				if cpos == 35:
-					bit[6][pp][cpos] = 'S0_neg'
+					bit[6][pp][cpos] = 'NOT pp0(32)'
 	elif pp == pps_per_level[6]-1:				# pp16
 		for cpos in range(0, 64):
 			if cpos >= 32:
 				bit[6][pp][cpos] = "pp" + str(pp) + "(" + str(cpos-2*pp) + ")"
-		bit[6][pp][2*(pp-1)] = "S" + str(pp-1)
+		bit[6][pp][2*(pp-1)] = "pp" + str(pp-1) + "(32)"
 	else:										# pp1 to pp15
 		for cpos in range(0, 64):
 			if 2*pp <= cpos <= 2*pp + 32:
 				bit[6][pp][cpos] = "pp" + str(pp) + "(" + str(cpos-2*pp) + ")"
 			elif cpos == 2*pp + 33:
-				bit[6][pp][cpos] = 'S' + str(pp) + '_neg'
+				bit[6][pp][cpos] = 'NOT pp' + str(pp) + "(32)"
 			elif cpos == 2*pp + 34 and pp != 15:
-				bit[6][pp][cpos] = '1'
-		bit[6][pp][2*(pp-1)] = "S" + str(pp-1)
+				bit[6][pp][cpos] = "'1'"
+		bit[6][pp][2*(pp-1)] = "pp" + str(pp-1) + "(32)"
 
 
 
 
 ###MAIN###
-outfile = open("testfile.vhd", "w")
-outfile.write('''COMPONENT full_adder IS
-	PORT (
-		A 		: IN STD_LOGIC;
-		B 		: IN STD_LOGIC;
-		CIN 	: IN STD_LOGIC;
-		S 		: OUT STD_LOGIC;
-		COUT 	: OUT STD_LOGIC
-	);
-END COMPONENT;
-
-COMPONENT half_adder IS
-	PORT (
-		A 		: IN STD_LOGIC;
-		B 		: IN STD_LOGIC;
-		S 		: OUT STD_LOGIC;
-		COUT 	: OUT STD_LOGIC
-	);
-END COMPONENT;
-
-''')
+outfile1 = open("testfile_part1.vhd", "w")
+outfile2 = open("testfile_part2.vhd", "w")
 for l in range(5, -1, -1):						#scan from l=5 to l=0
 	for cpos in range(0, 64):					#scan from cpos=0 to cpos=63
 		if need_adders(l+1, cpos):
 			instantiate_adders(l+1, cpos)
 		if not generate_values(l, cpos):
 			print("error")
+outfile1.close()
+outfile2.close()
 
-outfile.close()
+with open("testfile.vhd", "w") as outfile:
+	outfile.write('''LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+
+ENTITY mbe IS
+	PORT(
+		A,B		: IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		P 		: OUT 	STD_LOGIC_VECTOR(63 DOWNTO 0)
+	);
+END mbe ;
+
+ARCHITECTURE struct OF mbe IS
+
+	COMPONENT full_adder IS
+		PORT (
+			A 		: IN STD_LOGIC;
+			B 		: IN STD_LOGIC;
+			CIN 	: IN STD_LOGIC;
+			S 		: OUT STD_LOGIC;
+			COUT 	: OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	COMPONENT half_adder IS
+		PORT (
+			A 		: IN STD_LOGIC;
+			B 		: IN STD_LOGIC;
+			S 		: OUT STD_LOGIC;
+			COUT 	: OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	SIGNAL IN1_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL IN2_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+''')
+
+	with open("testfile_part1.vhd") as infile1:
+		for line in infile1:
+			outfile.write(line)
+	outfile.write('''
+BEGIN
+
+	IN1_sum(1 DOWNTO 0) <= pp0(1 DOWNTO 0);
+	IN1_sum(2) <= HA1_l1_c2_S;
+	IN1_sum(3) <= HA1_l1_c3_S;
+	IN1_sum(4) <= FA1_l1_c4_S;
+	IN1_sum(5) <= FA1_l1_c5_S;
+	IN1_sum(6) <= FA1_l1_c6_S;
+	IN1_sum(7) <= FA1_l1_c7_S;
+	IN1_sum(8) <= FA1_l1_c8_S;
+	IN1_sum(9) <= FA1_l1_c9_S;
+	IN1_sum(10) <= FA1_l1_c10_S;
+	IN1_sum(11) <= FA1_l1_c11_S;
+	IN1_sum(12) <= FA1_l1_c12_S;
+	IN1_sum(13) <= FA1_l1_c13_S;
+	IN1_sum(14) <= FA1_l1_c14_S;
+	IN1_sum(15) <= FA1_l1_c15_S;
+	IN1_sum(16) <= FA1_l1_c16_S;
+	IN1_sum(17) <= FA1_l1_c17_S;
+	IN1_sum(18) <= FA1_l1_c18_S;
+	IN1_sum(19) <= FA1_l1_c19_S;
+	IN1_sum(20) <= FA1_l1_c20_S;
+	IN1_sum(21) <= FA1_l1_c21_S;
+	IN1_sum(22) <= FA1_l1_c22_S;
+	IN1_sum(23) <= FA1_l1_c23_S;
+	IN1_sum(24) <= FA1_l1_c24_S;
+	IN1_sum(25) <= FA1_l1_c25_S;
+	IN1_sum(26) <= FA1_l1_c26_S;
+	IN1_sum(27) <= FA1_l1_c27_S;
+	IN1_sum(28) <= FA1_l1_c28_S;
+	IN1_sum(29) <= FA1_l1_c29_S;
+	IN1_sum(30) <= FA1_l1_c30_S;
+	IN1_sum(31) <= FA1_l1_c31_S;
+	IN1_sum(32) <= FA1_l1_c32_S;
+	IN1_sum(33) <= FA1_l1_c33_S;
+	IN1_sum(34) <= FA1_l1_c34_S;
+	IN1_sum(35) <= FA1_l1_c35_S;
+	IN1_sum(36) <= FA1_l1_c36_S;
+	IN1_sum(37) <= FA1_l1_c37_S;
+	IN1_sum(38) <= FA1_l1_c38_S;
+	IN1_sum(39) <= FA1_l1_c39_S;
+	IN1_sum(40) <= FA1_l1_c40_S;
+	IN1_sum(41) <= FA1_l1_c41_S;
+	IN1_sum(42) <= FA1_l1_c42_S;
+	IN1_sum(43) <= FA1_l1_c43_S;
+	IN1_sum(44) <= FA1_l1_c44_S;
+	IN1_sum(45) <= FA1_l1_c45_S;
+	IN1_sum(46) <= FA1_l1_c46_S;
+	IN1_sum(47) <= FA1_l1_c47_S;
+	IN1_sum(48) <= FA1_l1_c48_S;
+	IN1_sum(49) <= FA1_l1_c49_S;
+	IN1_sum(50) <= FA1_l1_c50_S;
+	IN1_sum(51) <= FA1_l1_c51_S;
+	IN1_sum(52) <= FA1_l1_c52_S;
+	IN1_sum(53) <= FA1_l1_c53_S;
+	IN1_sum(54) <= FA1_l1_c54_S;
+	IN1_sum(55) <= FA1_l1_c55_S;
+	IN1_sum(56) <= FA1_l1_c56_S;
+	IN1_sum(57) <= FA1_l1_c57_S;
+	IN1_sum(58) <= FA1_l1_c58_S;
+	IN1_sum(59) <= FA1_l1_c59_S;
+	IN1_sum(60) <= FA1_l1_c60_S;
+	IN1_sum(61) <= FA1_l1_c61_S;
+	IN1_sum(62) <= FA1_l1_c62_S;
+	IN1_sum(63) <= FA1_l1_c63_S;
+
+	IN2_sum(0) <= pp0(32);
+	IN2_sum(1) <= '0';
+	IN2_sum(2) <= pp1(32);
+	IN2_sum(3) <= HA1_l1_c2_Cout;
+	IN2_sum(4) <= HA1_l1_c3_Cout;
+	IN2_sum(5) <= FA1_l1_c4_Cout;
+	IN2_sum(6) <= FA1_l1_c5_Cout;
+	IN2_sum(7) <= FA1_l1_c6_Cout;
+	IN2_sum(8) <= FA1_l1_c7_Cout;
+	IN2_sum(9) <= FA1_l1_c8_Cout;
+	IN2_sum(10) <= FA1_l1_c9_Cout;
+	IN2_sum(11) <= FA1_l1_c10_Cout;
+	IN2_sum(12) <= FA1_l1_c11_Cout;
+	IN2_sum(13) <= FA1_l1_c12_Cout;
+	IN2_sum(14) <= FA1_l1_c13_Cout;
+	IN2_sum(15) <= FA1_l1_c14_Cout;
+	IN2_sum(16) <= FA1_l1_c15_Cout;
+	IN2_sum(17) <= FA1_l1_c16_Cout;
+	IN2_sum(18) <= FA1_l1_c17_Cout;
+	IN2_sum(19) <= FA1_l1_c18_Cout;
+	IN2_sum(20) <= FA1_l1_c19_Cout;
+	IN2_sum(21) <= FA1_l1_c20_Cout;
+	IN2_sum(22) <= FA1_l1_c21_Cout;
+	IN2_sum(23) <= FA1_l1_c22_Cout;
+	IN2_sum(24) <= FA1_l1_c23_Cout;
+	IN2_sum(25) <= FA1_l1_c24_Cout;
+	IN2_sum(26) <= FA1_l1_c25_Cout;
+	IN2_sum(27) <= FA1_l1_c26_Cout;
+	IN2_sum(28) <= FA1_l1_c27_Cout;
+	IN2_sum(29) <= FA1_l1_c28_Cout;
+	IN2_sum(30) <= FA1_l1_c29_Cout;
+	IN2_sum(31) <= FA1_l1_c30_Cout;
+	IN2_sum(32) <= FA1_l1_c31_Cout;
+	IN2_sum(33) <= FA1_l1_c32_Cout;
+	IN2_sum(34) <= FA1_l1_c33_Cout;
+	IN2_sum(35) <= FA1_l1_c34_Cout;
+	IN2_sum(36) <= FA1_l1_c35_Cout;
+	IN2_sum(37) <= FA1_l1_c36_Cout;
+	IN2_sum(38) <= FA1_l1_c37_Cout;
+	IN2_sum(39) <= FA1_l1_c38_Cout;
+	IN2_sum(40) <= FA1_l1_c39_Cout;
+	IN2_sum(41) <= FA1_l1_c40_Cout;
+	IN2_sum(42) <= FA1_l1_c41_Cout;
+	IN2_sum(43) <= FA1_l1_c42_Cout;
+	IN2_sum(44) <= FA1_l1_c43_Cout;
+	IN2_sum(45) <= FA1_l1_c44_Cout;
+	IN2_sum(46) <= FA1_l1_c45_Cout;
+	IN2_sum(47) <= FA1_l1_c46_Cout;
+	IN2_sum(48) <= FA1_l1_c47_Cout;
+	IN2_sum(49) <= FA1_l1_c48_Cout;
+	IN2_sum(50) <= FA1_l1_c49_Cout;
+	IN2_sum(51) <= FA1_l1_c50_Cout;
+	IN2_sum(52) <= FA1_l1_c51_Cout;
+	IN2_sum(53) <= FA1_l1_c52_Cout;
+	IN2_sum(54) <= FA1_l1_c53_Cout;
+	IN2_sum(55) <= FA1_l1_c54_Cout;
+	IN2_sum(56) <= FA1_l1_c55_Cout;
+	IN2_sum(57) <= FA1_l1_c56_Cout;
+	IN2_sum(58) <= FA1_l1_c57_Cout;
+	IN2_sum(59) <= FA1_l1_c58_Cout;
+	IN2_sum(60) <= FA1_l1_c59_Cout;
+	IN2_sum(61) <= FA1_l1_c60_Cout;
+	IN2_sum(62) <= FA1_l1_c61_Cout;
+	IN2_sum(63) <= FA1_l1_c62_Cout;
+
+''')
+	with open("testfile_part2.vhd") as infile2:
+		for line in infile2:
+			outfile.write(line)
+
+	outfile.write('''	final_sum : PROCESS (IN1_sum, IN2_sum)
+	BEGIN
+		P <= IN1_sum + IN2_sum;
+	END PROCESS final_sum;
+
+END struct;''')
+
+os.remove("testfile_part1.vhd")
+os.remove("testfile_part2.vhd")
