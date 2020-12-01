@@ -133,7 +133,7 @@ for pp in range(0, pps_per_level[6]):
 				if cpos == 33 or cpos == 34:
 					bit[6][pp][cpos] = 'pp0(32)'
 				if cpos == 35:
-					bit[6][pp][cpos] = 'NOT pp0(32)'
+					bit[6][pp][cpos] = 'pp0_Sneg'
 	elif pp == pps_per_level[6]-1:				# pp16
 		for cpos in range(0, 64):
 			if cpos >= 32:
@@ -144,7 +144,7 @@ for pp in range(0, pps_per_level[6]):
 			if 2*pp <= cpos <= 2*pp + 32:
 				bit[6][pp][cpos] = "pp" + str(pp) + "(" + str(cpos-2*pp) + ")"
 			elif cpos == 2*pp + 33:
-				bit[6][pp][cpos] = 'NOT pp' + str(pp) + "(32)"
+				bit[6][pp][cpos] = 'pp' + str(pp) + "_Sneg"
 			elif cpos == 2*pp + 34 and pp != 15:
 				bit[6][pp][cpos] = "'1'"
 		bit[6][pp][2*(pp-1)] = "pp" + str(pp-1) + "(32)"
@@ -199,6 +199,24 @@ ARCHITECTURE struct OF mbe IS
 
 	SIGNAL IN1_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL IN2_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+	SIGNAL pp0_Sneg 		: STD_LOGIC;
+	SIGNAL pp1_Sneg 		: STD_LOGIC;
+	SIGNAL pp2_Sneg 		: STD_LOGIC;
+	SIGNAL pp3_Sneg 		: STD_LOGIC;
+	SIGNAL pp4_Sneg 		: STD_LOGIC;
+	SIGNAL pp5_Sneg 		: STD_LOGIC;
+	SIGNAL pp6_Sneg 		: STD_LOGIC;
+	SIGNAL pp7_Sneg 		: STD_LOGIC;
+	SIGNAL pp8_Sneg 		: STD_LOGIC;
+	SIGNAL pp9_Sneg 		: STD_LOGIC;
+	SIGNAL pp10_Sneg 		: STD_LOGIC;
+	SIGNAL pp11_Sneg 		: STD_LOGIC;
+	SIGNAL pp12_Sneg 		: STD_LOGIC;
+	SIGNAL pp13_Sneg 		: STD_LOGIC;
+	SIGNAL pp14_Sneg 		: STD_LOGIC;
+	SIGNAL pp15_Sneg 		: STD_LOGIC;
+
 ''')
 
 	with open("testfile_part1.vhd") as infile1:
@@ -206,6 +224,23 @@ ARCHITECTURE struct OF mbe IS
 			outfile.write(line)
 	outfile.write('''
 BEGIN
+
+	pp0_Sneg	<= NOT pp0(32);
+	pp1_Sneg	<= NOT pp1(32);
+	pp2_Sneg	<= NOT pp2(32);
+	pp3_Sneg	<= NOT pp3(32);
+	pp4_Sneg	<= NOT pp4(32);
+	pp5_Sneg	<= NOT pp5(32);
+	pp6_Sneg	<= NOT pp6(32);
+	pp7_Sneg	<= NOT pp7(32);
+	pp8_Sneg	<= NOT pp8(32);
+	pp9_Sneg	<= NOT pp9(32);
+	pp10_Sneg	<= NOT pp10(32);
+	pp11_Sneg	<= NOT pp11(32);
+	pp12_Sneg	<= NOT pp12(32);
+	pp13_Sneg	<= NOT pp13(32);
+	pp14_Sneg	<= NOT pp14(32);
+	pp15_Sneg	<= NOT pp15(32);
 
 	IN1_sum(1 DOWNTO 0) <= pp0(1 DOWNTO 0);
 	IN1_sum(2) <= HA1_l1_c2_S;

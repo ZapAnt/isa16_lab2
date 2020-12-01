@@ -32,6 +32,24 @@ ARCHITECTURE struct OF mbe IS
 
 	SIGNAL IN1_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL IN2_sum 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+	SIGNAL pp0_Sneg 		: STD_LOGIC;
+	SIGNAL pp1_Sneg 		: STD_LOGIC;
+	SIGNAL pp2_Sneg 		: STD_LOGIC;
+	SIGNAL pp3_Sneg 		: STD_LOGIC;
+	SIGNAL pp4_Sneg 		: STD_LOGIC;
+	SIGNAL pp5_Sneg 		: STD_LOGIC;
+	SIGNAL pp6_Sneg 		: STD_LOGIC;
+	SIGNAL pp7_Sneg 		: STD_LOGIC;
+	SIGNAL pp8_Sneg 		: STD_LOGIC;
+	SIGNAL pp9_Sneg 		: STD_LOGIC;
+	SIGNAL pp10_Sneg 		: STD_LOGIC;
+	SIGNAL pp11_Sneg 		: STD_LOGIC;
+	SIGNAL pp12_Sneg 		: STD_LOGIC;
+	SIGNAL pp13_Sneg 		: STD_LOGIC;
+	SIGNAL pp14_Sneg 		: STD_LOGIC;
+	SIGNAL pp15_Sneg 		: STD_LOGIC;
+
 	SIGNAL HA1_l6_c24_S		: STD_LOGIC;
 	SIGNAL HA1_l6_c24_Cout	: STD_LOGIC;
 	SIGNAL HA1_l6_c25_S		: STD_LOGIC;
@@ -1083,6 +1101,23 @@ ARCHITECTURE struct OF mbe IS
 
 BEGIN
 
+	pp0_Sneg	<= NOT pp0(32);
+	pp1_Sneg	<= NOT pp1(32);
+	pp2_Sneg	<= NOT pp2(32);
+	pp3_Sneg	<= NOT pp3(32);
+	pp4_Sneg	<= NOT pp4(32);
+	pp5_Sneg	<= NOT pp5(32);
+	pp6_Sneg	<= NOT pp6(32);
+	pp7_Sneg	<= NOT pp7(32);
+	pp8_Sneg	<= NOT pp8(32);
+	pp9_Sneg	<= NOT pp9(32);
+	pp10_Sneg	<= NOT pp10(32);
+	pp11_Sneg	<= NOT pp11(32);
+	pp12_Sneg	<= NOT pp12(32);
+	pp13_Sneg	<= NOT pp13(32);
+	pp14_Sneg	<= NOT pp14(32);
+	pp15_Sneg	<= NOT pp15(32);
+
 	IN1_sum(1 DOWNTO 0) <= pp0(1 DOWNTO 0);
 	IN1_sum(2) <= HA1_l1_c2_S;
 	IN1_sum(3) <= HA1_l1_c3_S;
@@ -1494,8 +1529,8 @@ BEGIN
 
 	FA1_l6_c35	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp0(32),
-			B 		=>	NOT pp1(32),
+			A 		=>	pp0_Sneg,
+			B 		=>	pp1_Sneg,
 			CIN 	=>	pp2(31),
 			S 		=>	FA1_l6_c35_S,
 			COUT 	=>	FA1_l6_c35_Cout
@@ -1565,7 +1600,7 @@ BEGIN
 
 	FA1_l6_c37	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp2(32),
+			A 		=>	pp2_Sneg,
 			B 		=>	pp3(31),
 			CIN 	=>	pp4(29),
 			S 		=>	FA1_l6_c37_S,
@@ -1618,7 +1653,7 @@ BEGIN
 
 	FA1_l6_c39	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp3(32),
+			A 		=>	pp3_Sneg,
 			B 		=>	pp4(31),
 			CIN 	=>	pp5(29),
 			S 		=>	FA1_l6_c39_S,
@@ -1653,7 +1688,7 @@ BEGIN
 
 	FA1_l6_c41	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp4(32),
+			A 		=>	pp4_Sneg,
 			B 		=>	pp5(31),
 			CIN 	=>	pp6(29),
 			S 		=>	FA1_l6_c41_S,
@@ -2527,7 +2562,7 @@ BEGIN
 	FA1_l5_c43	:	full_adder
 		PORT MAP (
 			A 		=>	HA1_l6_c42_Cout,
-			B 		=>	NOT pp5(32),
+			B 		=>	pp5_Sneg,
 			CIN 	=>	pp6(31),
 			S 		=>	FA1_l5_c43_S,
 			COUT 	=>	FA1_l5_c43_Cout
@@ -2597,7 +2632,7 @@ BEGIN
 
 	FA1_l5_c45	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp6(32),
+			A 		=>	pp6_Sneg,
 			B 		=>	pp7(31),
 			CIN 	=>	pp8(29),
 			S 		=>	FA1_l5_c45_S,
@@ -2650,7 +2685,7 @@ BEGIN
 
 	FA1_l5_c47	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp7(32),
+			A 		=>	pp7_Sneg,
 			B 		=>	pp8(31),
 			CIN 	=>	pp9(29),
 			S 		=>	FA1_l5_c47_S,
@@ -2685,7 +2720,7 @@ BEGIN
 
 	FA1_l5_c49	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp8(32),
+			A 		=>	pp8_Sneg,
 			B 		=>	pp9(31),
 			CIN 	=>	pp10(29),
 			S 		=>	FA1_l5_c49_S,
@@ -3750,7 +3785,7 @@ BEGIN
 	FA1_l4_c51	:	full_adder
 		PORT MAP (
 			A 		=>	HA1_l5_c50_Cout,
-			B 		=>	NOT pp9(32),
+			B 		=>	pp9_Sneg,
 			CIN 	=>	pp10(31),
 			S 		=>	FA1_l4_c51_S,
 			COUT 	=>	FA1_l4_c51_Cout
@@ -3802,7 +3837,7 @@ BEGIN
 
 	FA1_l4_c53	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp10(32),
+			A 		=>	pp10_Sneg,
 			B 		=>	pp11(31),
 			CIN 	=>	pp12(29),
 			S 		=>	FA1_l4_c53_S,
@@ -3837,7 +3872,7 @@ BEGIN
 
 	FA1_l4_c55	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp11(32),
+			A 		=>	pp11_Sneg,
 			B 		=>	pp12(31),
 			CIN 	=>	pp13(29),
 			S 		=>	FA1_l4_c55_S,
@@ -4751,7 +4786,7 @@ BEGIN
 	FA1_l3_c57	:	full_adder
 		PORT MAP (
 			A 		=>	HA1_l4_c56_Cout,
-			B 		=>	NOT pp12(32),
+			B 		=>	pp12_Sneg,
 			CIN 	=>	pp13(31),
 			S 		=>	FA1_l3_c57_S,
 			COUT 	=>	FA1_l3_c57_Cout
@@ -4785,7 +4820,7 @@ BEGIN
 
 	FA1_l3_c59	:	full_adder
 		PORT MAP (
-			A 		=>	NOT pp13(32),
+			A 		=>	pp13_Sneg,
 			B 		=>	pp14(31),
 			CIN 	=>	pp15(29),
 			S 		=>	FA1_l3_c59_S,
@@ -5314,7 +5349,7 @@ BEGIN
 	FA1_l2_c61	:	full_adder
 		PORT MAP (
 			A 		=>	HA1_l3_c60_Cout,
-			B 		=>	NOT pp14(32),
+			B 		=>	pp14_Sneg,
 			CIN 	=>	pp15(31),
 			S 		=>	FA1_l2_c61_S,
 			COUT 	=>	FA1_l2_c61_Cout
@@ -5878,7 +5913,7 @@ BEGIN
 	FA1_l1_c63	:	full_adder
 		PORT MAP (
 			A 		=>	HA1_l2_c62_Cout,
-			B 		=>	NOT pp15(32),
+			B 		=>	pp15_Sneg,
 			CIN 	=>	pp16(31),
 			S 		=>	FA1_l1_c63_S,
 			COUT 	=>	FA1_l1_c63_Cout
