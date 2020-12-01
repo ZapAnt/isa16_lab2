@@ -132,41 +132,41 @@ BEGIN
 --   EXP_neg_int <= NOT(A_EXP(7) OR B_EXP(7));
    EXP_neg_int <= '1' WHEN ( (A_EXP(7)='0' AND NOT (A_EXP=X"7F")) AND (B_EXP(7)='0' AND NOT (B_EXP=X"7F")) ) ELSE '0';
 
---SIGN_out_reg : FF
---      PORT MAP (
---         D              => SIGN_out_stage1,
---         CLK            => clk,
---         RST_N          => '1',
---         EN             => '1',
---         Q              => SIGN_out_stage1_outreg
---      );
---
---Is1_reg : FF
---PORT MAP (
---         D              => isINF_stage1,
---         CLK            => clk,
---         RST_N          => '1',
---         EN             => '1',
---         Q              => isINF_stage1_outreg
---      );
---
---Is2_reg : FF
---PORT MAP (
---         D              => isNaN_stage1,
---         CLK            => clk,
---         RST_N          => '1',
---         EN             => '1',
---         Q              => isNaN_stage1_outreg
---      );
---
---Is3_reg : FF
---PORT MAP (
---         D              => isZ_tab_stage1,
---         CLK            => clk,
---         RST_N          => '1',
---         EN             => '1',
---         Q              => isZ_tab_stage1_outreg
---      );
+SIGN_out_reg : FF
+      PORT MAP (
+         D              => SIGN_out_stage1,
+         CLK            => clk,
+         RST_N          => '1',
+         EN             => '1',
+         Q              => SIGN_out_stage1_outreg
+      );
+
+Is1_reg : FF
+PORT MAP (
+         D              => isINF_stage1,
+         CLK            => clk,
+         RST_N          => '1',
+         EN             => '1',
+         Q              => isINF_stage1_outreg
+      );
+
+Is2_reg : FF
+PORT MAP (
+         D              => isNaN_stage1,
+         CLK            => clk,
+         RST_N          => '1',
+         EN             => '1',
+         Q              => isNaN_stage1_outreg
+      );
+
+Is3_reg : FF
+PORT MAP (
+         D              => isZ_tab_stage1,
+         CLK            => clk,
+         RST_N          => '1',
+         EN             => '1',
+         Q              => isZ_tab_stage1_outreg
+      );
 
    -- ModuleWare code(v1.1) for instance 'I4' of 'add'
    I4combo: PROCESS (A_EXP, B_EXP, dout)
