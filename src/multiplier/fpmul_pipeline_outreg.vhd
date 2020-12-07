@@ -101,7 +101,7 @@ ARCHITECTURE pipeline_inputreg OF FPmul_outreg IS
       isZ_tab_stage1  : OUT    std_logic
    );
    END COMPONENT;
-   COMPONENT FPmul_stage2_outreg
+   COMPONENT FPmul_stage2
    PORT (
       A_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       A_SIG           : IN     std_logic_vector (31 DOWNTO 0);
@@ -161,7 +161,7 @@ ARCHITECTURE pipeline_inputreg OF FPmul_outreg IS
    -- Optional embedded configurations
    -- pragma synthesis_off
    FOR ALL : FPmul_stage1 USE ENTITY work.FPmul_stage1;
-   FOR ALL : FPmul_stage2_outreg USE ENTITY work.FPmul_stage2_outreg;
+   FOR ALL : FPmul_stage2 USE ENTITY work.FPmul_stage2_outreg;
    FOR ALL : FPmul_stage3 USE ENTITY work.FPmul_stage3;
    FOR ALL : FPmul_stage4 USE ENTITY work.FPmul_stage4;
    -- pragma synthesis_on
@@ -202,7 +202,7 @@ BEGIN
          isNaN_stage1    => isNaN_stage1,
          isZ_tab_stage1  => isZ_tab_stage1
       );
-   I2 : FPmul_stage2_outreg
+   I2 : FPmul_stage2
       PORT MAP (
          A_EXP           => A_EXP,
          A_SIG           => A_SIG,

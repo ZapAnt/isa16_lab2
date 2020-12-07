@@ -13,7 +13,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY FPmul IS
+ENTITY FPmul_inreg IS
    PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
@@ -23,7 +23,7 @@ ENTITY FPmul IS
 
 -- Declarations
 
-END FPmul ;
+END FPmul_inreg ;
 
 --
 -- VHDL Architecture HAVOC.FPmul.pipeline
@@ -42,7 +42,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ARCHITECTURE pipeline_inputreg OF FPmul IS
+ARCHITECTURE pipeline_inputreg OF FPmul_inreg IS
 
    -- Architecture declarations
 
@@ -169,7 +169,7 @@ ARCHITECTURE pipeline_inputreg OF FPmul IS
 BEGIN
 
    -- Instance port mappings.
-   FP_A_reg : REG
+   FP_A_reg : REG                            --registers added to inputs
       GENERIC MAP(32)
       PORT MAP (
          D              => FP_A,
