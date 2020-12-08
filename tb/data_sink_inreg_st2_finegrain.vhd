@@ -7,15 +7,15 @@ USE ieee.std_logic_textio.all;
 LIBRARY std;
 USE std.textio.all;
 
-ENTITY data_sink_outreg IS
+ENTITY data_sink_inreg_st2_finegrain IS
 	PORT (
 		CLK 		: IN std_logic;
 		DATA_IN    	: IN signed(31 DOWNTO 0);
 		SMPL_STAT 	: IN std_logic
 	);
-END data_sink_outreg;
+END data_sink_inreg_st2_finegrain;
 
-ARCHITECTURE beh OF data_sink_outreg IS
+ARCHITECTURE beh OF data_sink_inreg_st2_finegrain IS
 
 	CONSTANT	delay		: integer := 6; --pipeline fpmul with input regs
 

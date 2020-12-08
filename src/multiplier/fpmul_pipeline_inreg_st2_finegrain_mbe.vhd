@@ -14,7 +14,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY FPmul_outreg IS
+ENTITY FPmul_inreg_st2_finegrain_mbe IS
    PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
@@ -24,7 +24,7 @@ ENTITY FPmul_outreg IS
 
 -- Declarations
 
-END FPmul_outreg;
+END FPmul_inreg_st2_finegrain_mbe;
 
 --
 -- VHDL Architecture HAVOC.FPmul.pipeline
@@ -43,7 +43,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ARCHITECTURE pipeline_inputreg OF FPmul_outreg IS
+ARCHITECTURE pipeline OF FPmul_inreg_st2_finegrain_mbe IS
 
    -- Architecture declarations
 
@@ -161,7 +161,7 @@ ARCHITECTURE pipeline_inputreg OF FPmul_outreg IS
    -- Optional embedded configurations
    -- pragma synthesis_off
    FOR ALL : FPmul_stage1 USE ENTITY work.FPmul_stage1;
-   FOR ALL : FPmul_stage2 USE ENTITY work.FPmul_stage2_outreg;
+   FOR ALL : FPmul_stage2 USE ENTITY work.stage2_finegrain_mbe;
    FOR ALL : FPmul_stage3 USE ENTITY work.FPmul_stage3;
    FOR ALL : FPmul_stage4 USE ENTITY work.FPmul_stage4;
    -- pragma synthesis_on
@@ -256,4 +256,4 @@ BEGIN
          FP_Z          => FP_Z
       );
 
-END pipeline_inputreg;
+END pipeline;

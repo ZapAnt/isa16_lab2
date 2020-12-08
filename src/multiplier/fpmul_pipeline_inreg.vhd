@@ -1,4 +1,3 @@
-
 -- VHDL Entity HAVOC.FPmul.symbol
 --
 -- Created by
@@ -14,7 +13,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY FPmul_outreg_mbe IS
+ENTITY FPmul_inreg IS
    PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
@@ -24,7 +23,7 @@ ENTITY FPmul_outreg_mbe IS
 
 -- Declarations
 
-END FPmul_outreg_mbe;
+END FPmul_inreg ;
 
 --
 -- VHDL Architecture HAVOC.FPmul.pipeline
@@ -43,7 +42,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ARCHITECTURE pipeline_outputreg_mbe OF FPmul_outreg_mbe IS
+ARCHITECTURE pipeline OF FPmul_inreg IS
 
    -- Architecture declarations
 
@@ -161,7 +160,7 @@ ARCHITECTURE pipeline_outputreg_mbe OF FPmul_outreg_mbe IS
    -- Optional embedded configurations
    -- pragma synthesis_off
    FOR ALL : FPmul_stage1 USE ENTITY work.FPmul_stage1;
-   FOR ALL : FPmul_stage2 USE ENTITY work.FPmul_stage2_outreg_mbe;
+   FOR ALL : FPmul_stage2 USE ENTITY work.FPmul_stage2;
    FOR ALL : FPmul_stage3 USE ENTITY work.FPmul_stage3;
    FOR ALL : FPmul_stage4 USE ENTITY work.FPmul_stage4;
    -- pragma synthesis_on
@@ -170,7 +169,7 @@ ARCHITECTURE pipeline_outputreg_mbe OF FPmul_outreg_mbe IS
 BEGIN
 
    -- Instance port mappings.
-   FP_A_reg : REG
+   FP_A_reg : REG                            --registers added to inputs
       GENERIC MAP(32)
       PORT MAP (
          D              => FP_A,
@@ -256,4 +255,4 @@ BEGIN
          FP_Z          => FP_Z
       );
 
-END pipeline_outputreg_mbe;
+END pipeline;

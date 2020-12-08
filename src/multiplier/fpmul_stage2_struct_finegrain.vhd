@@ -14,7 +14,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY fpmul_stage2_outreg_mbe IS
+ENTITY stage2_finegrain IS
    PORT(
       A_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       A_SIG           : IN     std_logic_vector (31 DOWNTO 0);
@@ -37,7 +37,7 @@ ENTITY fpmul_stage2_outreg_mbe IS
 
 -- Declarations
 
-END fpmul_stage2_outreg_mbe;
+END stage2_finegrain;
 
 --
 -- VHDL Architecture HAVOC.FPmul_stage2.struct
@@ -57,7 +57,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 
-ARCHITECTURE struct OF fpmul_stage2_outreg_mbe IS
+ARCHITECTURE struct OF stage2_finegrain IS
 
    -- Architecture declarations
 
@@ -90,12 +90,6 @@ ARCHITECTURE struct OF fpmul_stage2_outreg_mbe IS
    );
    END COMPONENT;
 
-   COMPONENT mbe IS
-      PORT(
-         A,B      : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
-         P     : OUT    STD_LOGIC_VECTOR(63 DOWNTO 0)
-      );
-   END COMPONENT;
 
 BEGIN
    -- Architecture concurrent statements
@@ -189,12 +183,12 @@ PORT MAP (
    END PROCESS I4combo;
 
    -- ModuleWare code(v1.1) for instance 'I2' of 'mult'
-   I2combo : mbe
-      PORT MAP (
-         A     => A_SIG,
-         B     => B_SIG,
-         P     => prod
-      );
+   I2combo : PROCESS (A_SIG, B_SIG)
+   VARIABLE dtemp : unsigned(63 DOWNTO 0);
+   BEGIN
+      dtemp := (unsigned(A_SIG) * unsigned(B_SIG));
+      prod <= std_logic_vector(dtemp);
+   END PROCESS I2combo;
 
    -- ModuleWare code(v1.1) for instance 'I6' of 'vdd'
    dout <= '1';
