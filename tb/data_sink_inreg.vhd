@@ -23,7 +23,7 @@ BEGIN
 	PROCESS(CLK)
 		VARIABLE	line_out 	: line;
 		VARIABLE	delayed_sig	: std_logic_vector(delay DOWNTO 0);
-		FILE 		res_fp 		: text OPEN WRITE_MODE IS "../sim/fp_prod_results_inputreg.hex";
+		FILE 		res_fp 		: text OPEN WRITE_MODE IS "../sim/fp_prod_results_inreg.hex";
 
 	BEGIN
 		IF CLK'event and CLK = '1' THEN

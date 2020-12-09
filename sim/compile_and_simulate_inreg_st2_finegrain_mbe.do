@@ -11,11 +11,18 @@ vcom -work work {../src/multiplier/fpmul_stage3_struct.vhd}
 vcom -work work {../src/multiplier/fpmul_stage4_struct.vhd}
 vcom -work work {../tb/clock_gen.vhd}
 vcom -work work {../tb/data_maker.vhd}
-vcom -work work {../tb/data_sink_inputreg.vhd}
-vcom -work work {../src/reg_nbit.vhd}
 
-vcom -work work {../src/multiplier/fpmul_pipeline_inputreg.vhd}
-vlog -work work {../tb/tb_fpmul.v}
+vcom -work work {../src/reg_nbit.vhd}
+vcom -work work {../src/FF.vhd}
+vcom -work work {../src/full_adder.vhd}
+vcom -work work {../src/half_adder.vhd}
+vcom -work work {../src/pp_gen.vhd}
+vcom -work work {../src/mbe.vhd}
+vcom -work work {../src/multiplier/fpmul_stage2_struct_finegrain_mbe.vhd}
+vcom -work work {../src/multiplier/fpmul_pipeline_inreg_st2_finegrain_mbe.vhd}
+vcom -work work {../tb/data_sink_inreg_st2_finegrain_mbe.vhd}
+vlog -work work {../tb/tb_fpmul_inreg_st2_finegrain_mbe.v}
+
 vsim work.tb_fpmul
 
 add wave -noupdate -divider {Clock Generate}

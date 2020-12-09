@@ -153,8 +153,8 @@ for pp in range(0, pps_per_level[6]):
 
 
 ###MAIN###
-outfile1 = open("testfile_part1.vhd", "w")
-outfile2 = open("testfile_part2.vhd", "w")
+outfile1 = open("mbe_part1.vhd", "w")
+outfile2 = open("mbe_part2.vhd", "w")
 for l in range(5, -1, -1):						#scan from l=5 to l=0
 	for cpos in range(0, 64):					#scan from cpos=0 to cpos=63
 		if need_adders(l+1, cpos):
@@ -164,7 +164,7 @@ for l in range(5, -1, -1):						#scan from l=5 to l=0
 outfile1.close()
 outfile2.close()
 
-with open("testfile.vhd", "w") as outfile:
+with open("mbe.vhd", "w") as outfile:
 	outfile.write('''LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
@@ -261,7 +261,7 @@ ARCHITECTURE struct OF mbe IS
 
 ''')
 
-	with open("testfile_part1.vhd") as infile1:
+	with open("mbe_part1.vhd") as infile1:
 		for line in infile1:
 			outfile.write(line)
 	outfile.write('''
@@ -437,7 +437,7 @@ BEGIN
 		);
 
 ''')
-	with open("testfile_part2.vhd") as infile2:
+	with open("mbe_part2.vhd") as infile2:
 		for line in infile2:
 			outfile.write(line)
 
@@ -450,5 +450,5 @@ BEGIN
 
 END struct;''')
 
-os.remove("testfile_part1.vhd")
-os.remove("testfile_part2.vhd")
+os.remove("mbe_part1.vhd")
+os.remove("mbe_part2.vhd")

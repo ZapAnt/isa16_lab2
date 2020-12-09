@@ -169,7 +169,7 @@ ARCHITECTURE pipeline OF FPmul_inreg IS
 BEGIN
 
    -- Instance port mappings.
-   FP_A_reg : REG                            --registers added to inputs
+   FP_A_reg : REG
       GENERIC MAP(32)
       PORT MAP (
          D              => FP_A,
