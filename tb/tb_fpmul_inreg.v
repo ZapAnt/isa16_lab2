@@ -1,6 +1,6 @@
 //`timescale 1ns
 
-module tb_fpmul;
+module tb_fpmul_inreg;
 
 	wire CLK_i;
 	wire SMPL_STAT_i;

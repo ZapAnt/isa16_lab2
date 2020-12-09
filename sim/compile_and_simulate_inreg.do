@@ -17,16 +17,16 @@ vcom -work work {../src/multiplier/fpmul_pipeline_inreg.vhd}
 vcom -work work {../tb/data_sink_inreg.vhd}
 vlog -work work {../tb/tb_fpmul_inreg.v}
 
-vsim work.tb_fpmul
+vsim work.tb_fpmul_inreg
 
 add wave -noupdate -divider {Clock Generate}
-add wave -noupdate -radix decimal /tb_fpmul/CG/*
+add wave -noupdate -radix decimal /tb_fpmul_inreg/CG/*
 add wave -noupdate -divider {Data Maker}
-add wave -noupdate -radix hexadecimal /tb_fpmul/DM/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg/DM/*
 add wave -noupdate -divider {UUT}
-add wave -noupdate -radix hexadecimal /tb_fpmul/UUT/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg/UUT/*
 add wave -noupdate -divider {Data Sink}
-add wave -noupdate -radix hexadecimal /tb_fpmul/DS/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg/DS/*
 configure wave -timelineunits ns
 update
 

@@ -19,16 +19,16 @@ vcom -work work {../src/multiplier/fpmul_pipeline_inreg_st2_finegrain.vhd}
 vcom -work work {../tb/data_sink_inreg_st2_finegrain.vhd}
 vlog -work work {../tb/tb_fpmul_inreg_st2_finegrain.v}
 
-vsim work.tb_fpmul
+vsim work.tb_fpmul_inreg_st2_finegrain
 
 add wave -noupdate -divider {Clock Generate}
-add wave -noupdate -radix decimal /tb_fpmul/CG/*
+add wave -noupdate -radix decimal /tb_fpmul_inreg_st2_finegrain/CG/*
 add wave -noupdate -divider {Data Maker}
-add wave -noupdate -radix hexadecimal /tb_fpmul/DM/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/DM/*
 add wave -noupdate -divider {UUT}
-add wave -noupdate -radix hexadecimal /tb_fpmul/UUT/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/UUT/*
 add wave -noupdate -divider {Data Sink}
-add wave -noupdate -radix hexadecimal /tb_fpmul/DS/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/DS/*
 configure wave -timelineunits ns
 update
 
