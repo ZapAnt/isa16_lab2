@@ -12,8 +12,6 @@ vcom -work work {../src/multiplier/fpmul_stage4_struct.vhd}
 vcom -work work {../tb/clock_gen.vhd}
 vcom -work work {../tb/data_maker.vhd}
 
-vcom -work work {../src/reg_nbit.vhd}
-vcom -work work {../src/FF.vhd}
 vcom -work work {../src/multiplier/fpmul_stage2_struct_finegrain.vhd}
 vcom -work work {../src/multiplier/fpmul_pipeline_inreg_st2_finegrain.vhd}
 vcom -work work {../tb/data_sink_inreg_st2_finegrain.vhd}

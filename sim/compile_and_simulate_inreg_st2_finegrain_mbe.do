@@ -12,8 +12,6 @@ vcom -work work {../src/multiplier/fpmul_stage4_struct.vhd}
 vcom -work work {../tb/clock_gen.vhd}
 vcom -work work {../tb/data_maker.vhd}
 
-vcom -work work {../src/reg_nbit.vhd}
-vcom -work work {../src/FF.vhd}
 vcom -work work {../src/full_adder.vhd}
 vcom -work work {../src/half_adder.vhd}
 vcom -work work {../src/pp_gen.vhd}
