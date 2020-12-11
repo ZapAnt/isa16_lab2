@@ -13,20 +13,20 @@ vcom -work work {../tb/clock_gen.vhd}
 vcom -work work {../tb/data_maker.vhd}
 
 vcom -work work {../src/multiplier/fpmul_stage2_struct_finegrain.vhd}
-vcom -work work {../src/multiplier/fpmul_pipeline_inreg_st2_finegrain.vhd}
-vcom -work work {../tb/data_sink_inreg_st2_finegrain.vhd}
-vlog -work work {../tb/tb_fpmul_inreg_st2_finegrain.v}
+vcom -work work {../src/multiplier/fpmul_pipeline_inreg_finegrain.vhd}
+vcom -work work {../tb/data_sink_inreg_finegrain.vhd}
+vlog -work work {../tb/tb_fpmul_inreg_finegrain.v}
 
-vsim work.tb_fpmul_inreg_st2_finegrain
+vsim work.tb_fpmul_inreg_finegrain
 
 add wave -noupdate -divider {Clock Generate}
-add wave -noupdate -radix decimal /tb_fpmul_inreg_st2_finegrain/CG/*
+add wave -noupdate -radix decimal /tb_fpmul_inreg_finegrain/CG/*
 add wave -noupdate -divider {Data Maker}
-add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/DM/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_finegrain/DM/*
 add wave -noupdate -divider {UUT}
-add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/UUT/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_finegrain/UUT/*
 add wave -noupdate -divider {Data Sink}
-add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_st2_finegrain/DS/*
+add wave -noupdate -radix hexadecimal /tb_fpmul_inreg_finegrain/DS/*
 configure wave -timelineunits ns
 update
 

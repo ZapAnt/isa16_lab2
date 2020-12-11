@@ -1,4 +1,3 @@
-
 -- VHDL Entity HAVOC.FPmul.symbol
 --
 -- Created by
@@ -14,7 +13,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY FPmul_inreg_st2_finegrain_mbe IS
+ENTITY FPmul_inreg_finegrain IS
    PORT(
       FP_A : IN     std_logic_vector (31 DOWNTO 0);
       FP_B : IN     std_logic_vector (31 DOWNTO 0);
@@ -24,7 +23,7 @@ ENTITY FPmul_inreg_st2_finegrain_mbe IS
 
 -- Declarations
 
-END FPmul_inreg_st2_finegrain_mbe;
+END FPmul_inreg_finegrain;
 
 --
 -- VHDL Architecture HAVOC.FPmul.pipeline
@@ -43,7 +42,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ARCHITECTURE pipeline OF FPmul_inreg_st2_finegrain_mbe IS
+ARCHITECTURE pipeline OF FPmul_inreg_finegrain IS
 
    -- Architecture declarations
 
@@ -77,14 +76,6 @@ ARCHITECTURE pipeline OF FPmul_inreg_st2_finegrain_mbe IS
 
 
    -- Component Declarations
-   COMPONENT REG
-   GENERIC (N:integer);
-   PORT (
-      D              : IN std_logic_vector(N-1 DOWNTO 0);
-      CLK,RST_N,EN   : IN std_logic;
-      Q              : OUT std_logic_vector(N-1 DOWNTO 0)
-   );
-   END COMPONENT;
 
    COMPONENT FPmul_stage1
    PORT (
@@ -161,7 +152,7 @@ ARCHITECTURE pipeline OF FPmul_inreg_st2_finegrain_mbe IS
    -- Optional embedded configurations
    -- pragma synthesis_off
    FOR ALL : FPmul_stage1 USE ENTITY work.FPmul_stage1;
-   FOR ALL : FPmul_stage2 USE ENTITY work.stage2_finegrain_mbe;
+   FOR ALL : FPmul_stage2 USE ENTITY work.stage2_finegrain;
    FOR ALL : FPmul_stage3 USE ENTITY work.FPmul_stage3;
    FOR ALL : FPmul_stage4 USE ENTITY work.FPmul_stage4;
    -- pragma synthesis_on
@@ -170,24 +161,14 @@ ARCHITECTURE pipeline OF FPmul_inreg_st2_finegrain_mbe IS
 BEGIN
 
    -- Instance port mappings.
-   FP_A_reg : REG
-      GENERIC MAP(32)
-      PORT MAP (
-         D              => FP_A,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => FPA
-      );
-   FP_B_reg : REG
-      GENERIC MAP(32)
-      PORT MAP (
-         D              => FP_B,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => FPB
-      );
+  PROCESS(clk)
+   BEGIN
+      IF RISING_EDGE(clk) THEN
+         FPA <= FP_A;
+         FPB <= FP_B;
+      END IF;
+  END PROCESS;
+
    I1 : FPmul_stage1
       PORT MAP (
          FP_A            => FPA,
