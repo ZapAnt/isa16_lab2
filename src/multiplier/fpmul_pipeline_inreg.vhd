@@ -76,14 +76,6 @@ ARCHITECTURE pipeline OF FPmul_inreg IS
 
 
    -- Component Declarations
-   COMPONENT REG
-   GENERIC (N:integer);
-   PORT (
-      D              : IN std_logic_vector(N-1 DOWNTO 0);
-      CLK,RST_N,EN   : IN std_logic;
-      Q              : OUT std_logic_vector(N-1 DOWNTO 0)
-   );
-   END COMPONENT;
 
    COMPONENT FPmul_stage1
    PORT (
@@ -169,24 +161,15 @@ ARCHITECTURE pipeline OF FPmul_inreg IS
 BEGIN
 
    -- Instance port mappings.
-   FP_A_reg : REG
-      GENERIC MAP(32)
-      PORT MAP (
-         D              => FP_A,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => FPA
-      );
-   FP_B_reg : REG
-      GENERIC MAP(32)
-      PORT MAP (
-         D              => FP_B,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => FPB
-      );
+
+PROCESS(clk)
+   BEGIN
+      IF RISING_EDGE(clk) THEN
+         FPA <= FP_A;
+         FPB <= FP_B;
+      END IF;
+END PROCESS;
+
    I1 : FPmul_stage1
       PORT MAP (
          FP_A            => FPA,

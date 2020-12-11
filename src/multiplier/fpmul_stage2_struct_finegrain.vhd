@@ -1,4 +1,3 @@
-
 -- VHDL Entity HAVOC.FPmul_stage2.interface
 --
 -- Created by
@@ -37,7 +36,7 @@ ENTITY stage2_finegrain IS
 
 -- Declarations
 
-END stage2_finegrain;
+END stage2_finegrain ;
 
 --
 -- VHDL Architecture HAVOC.FPmul_stage2.struct
@@ -62,34 +61,23 @@ ARCHITECTURE struct OF stage2_finegrain IS
    -- Architecture declarations
 
    -- Internal signal declarations
-   SIGNAL isINF_stage1_outreg,isNaN_stage1_outreg,isZ_tab_stage1_outreg : std_logic;
    SIGNAL EXP_in_int  : std_logic_vector(7 DOWNTO 0);
-   SIGNAL EXP_in_tmp  : std_logic_vector(7 DOWNTO 0);
-   SIGNAL EXP_neg_int,EXP_neg_int_outreg : std_logic;
-   SIGNAL EXP_pos_int,EXP_pos_int_outreg,SIGN_out_stage1_outreg : std_logic;
+   SIGNAL EXP_neg_int : std_logic;
+   SIGNAL EXP_pos_int : std_logic;
    SIGNAL SIG_in_int  : std_logic_vector(27 DOWNTO 0);
-   SIGNAL SIG_in_tmp  : std_logic_vector(27 DOWNTO 0);
    SIGNAL dout        : std_logic;
    SIGNAL dout1       : std_logic_vector(7 DOWNTO 0);
    SIGNAL prod        : std_logic_vector(63 DOWNTO 0);
-
- COMPONENT FF
-   PORT (
-      D              : IN std_logic;
-      CLK,RST_N,EN   : IN std_logic;
-      Q              : OUT std_logic
-   );
-   END COMPONENT;
-
- COMPONENT REG
-   GENERIC (N:integer);
-   PORT (
-      D              : IN std_logic_vector(N-1 DOWNTO 0);
-      CLK,RST_N,EN   : IN std_logic;
-      Q              : OUT std_logic_vector(N-1 DOWNTO 0)
-   );
-   END COMPONENT;
-
+	
+	--intermediate signals declarations
+	SIGNAL EXP_in_int_tmp      : std_logic_vector(7 DOWNTO 0);
+	SIGNAL EXP_neg_int_tmp     : std_logic;
+   SIGNAL EXP_pos_int_tmp     : std_logic;
+	SIGNAL SIG_in_int_tmp      : std_logic_vector(27 DOWNTO 0);
+	SIGNAL isINF_stage2_tmp    : std_logic;
+	SIGNAL isNaN_stage2_tmp    : std_logic;
+	SIGNAL isZ_tab_stage2_tmp  : std_logic;
+	SIGNAL SIGN_out_stage2_tmp : std_logic;
 
 BEGIN
    -- Architecture concurrent statements
@@ -101,16 +89,15 @@ BEGIN
    -- eb5 5
    EXP_in_int <= (NOT dout1(7)) & dout1(6 DOWNTO 0);
 
-   -- HDL Embedded Text Block 3 latch
-   -- eb2 2
-
-   PROCESS(clk)
+	
+------------------------------------------------added registers for finegrain pipelining	
+	   PROCESS(clk)
    BEGIN
       IF RISING_EDGE(clk) THEN
-         EXP_in_tmp <= EXP_in_int;
-         SIG_in_tmp <= SIG_in_int;
-         EXP_pos_stage2 <= EXP_pos_int;
-         EXP_neg_stage2 <= EXP_neg_int;
+         EXP_in_int_tmp <= EXP_in_int;
+         SIG_in_int_tmp <= SIG_in_int;
+         EXP_pos_int_tmp <= EXP_pos_int;
+         EXP_neg_int_tmp <= EXP_neg_int;
       END IF;
    END PROCESS;
 
@@ -119,10 +106,36 @@ BEGIN
    PROCESS(clk)
    BEGIN
       IF RISING_EDGE(clk) THEN
-         isINF_stage2 <= isINF_stage1_outreg;
-         isNaN_stage2 <= isNaN_stage1_outreg;
-         isZ_tab_stage2 <= isZ_tab_stage1_outreg;
-         SIGN_out_stage2 <= SIGN_out_stage1_outreg;
+         isINF_stage2_tmp <= isINF_stage1;
+         isNaN_stage2_tmp <= isNaN_stage1;
+         isZ_tab_stage2_tmp <= isZ_tab_stage1;
+         SIGN_out_stage2_tmp <= SIGN_out_stage1;
+      END IF;
+   END PROCESS;
+------------------------------------------------end added registers for finegrain pipelining		
+	
+   -- HDL Embedded Text Block 3 latch
+   -- eb2 2
+
+   PROCESS(clk)
+   BEGIN
+      IF RISING_EDGE(clk) THEN
+         EXP_in <= EXP_in_int_tmp;
+         SIG_in <= SIG_in_int_tmp;
+         EXP_pos_stage2 <= EXP_pos_int_tmp;
+         EXP_neg_stage2 <= EXP_neg_int_tmp;
+      END IF;
+   END PROCESS;
+
+   -- HDL Embedded Text Block 4 latch2
+   -- latch2 4
+   PROCESS(clk)
+   BEGIN
+      IF RISING_EDGE(clk) THEN
+         isINF_stage2 <= isINF_stage2_tmp;
+         isNaN_stage2 <= isNaN_stage2_tmp;
+         isZ_tab_stage2 <= isZ_tab_stage2_tmp;
+         SIGN_out_stage2 <= SIGN_out_stage2_tmp;
       END IF;
    END PROCESS;
 
@@ -132,41 +145,6 @@ BEGIN
 --   EXP_neg_int <= NOT(A_EXP(7) OR B_EXP(7));
    EXP_neg_int <= '1' WHEN ( (A_EXP(7)='0' AND NOT (A_EXP=X"7F")) AND (B_EXP(7)='0' AND NOT (B_EXP=X"7F")) ) ELSE '0';
 
-SIGN_out_reg : FF
-      PORT MAP (
-         D              => SIGN_out_stage1,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => SIGN_out_stage1_outreg
-      );
-
-Is1_reg : FF
-PORT MAP (
-         D              => isINF_stage1,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => isINF_stage1_outreg
-      );
-
-Is2_reg : FF
-PORT MAP (
-         D              => isNaN_stage1,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => isNaN_stage1_outreg
-      );
-
-Is3_reg : FF
-PORT MAP (
-         D              => isZ_tab_stage1,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => isZ_tab_stage1_outreg
-      );
 
    -- ModuleWare code(v1.1) for instance 'I4' of 'add'
    I4combo: PROCESS (A_EXP, B_EXP, dout)
@@ -193,27 +171,6 @@ PORT MAP (
    -- ModuleWare code(v1.1) for instance 'I6' of 'vdd'
    dout <= '1';
 
-
-
    -- Instance port mappings.
-
- SIGN_reg : REG
-      GENERIC MAP(28)
-      PORT MAP (
-         D              => SIG_in_tmp,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => SIG_in
-      );
- EXP_reg : REG
-      GENERIC MAP(8)
-      PORT MAP (
-         D              => EXP_in_tmp,
-         CLK            => clk,
-         RST_N          => '1',
-         EN             => '1',
-         Q              => EXP_in
-      );
 
 END struct;
