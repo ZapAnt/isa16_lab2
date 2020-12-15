@@ -1,12 +1,13 @@
+Information: Updating design information... (UID-85)
  
 ****************************************
 Report : timing
         -path full
         -delay max
         -max_paths 1
-Design : FPmul
+Design : FPmul_inreg
 Version: O-2018.06-SP4
-Date   : Thu Nov 19 20:38:15 2020
+Date   : Tue Dec 15 14:48:19 2020
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
@@ -21,7 +22,7 @@ Wire Load Model Mode: top
 
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
-  FPmul              5K_hvratio_1_1        NangateOpenCellLibrary
+  FPmul_inreg        5K_hvratio_1_1        NangateOpenCellLibrary
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Wire Load Model Mode: top
   clock network delay (ideal)                             0.00       0.00
   I1/A_SIG_reg[0]/CK (SDFF_X1)                            0.00       0.00 r
   I1/A_SIG_reg[0]/Q (SDFF_X1)                             0.07       0.07 f
-  I2/mult_134/A[0] (FPmul_DW02_mult_0)                    0.00       0.07 f
+  I2/mult_134/A[0] (FPmul_inreg_DW02_mult_0)              0.00       0.07 f
   I2/mult_134/U98/ZN (AND2_X1)                            0.05       0.12 f
   I2/mult_134/S0_22/CO (FA_X1)                            0.10       0.23 f
   I2/mult_134/S2_2_22/S (FA_X1)                           0.13       0.35 f
@@ -64,7 +65,7 @@ Wire Load Model Mode: top
   I2/mult_134/U515/Z (XOR2_X1)                            0.08       3.40 r
   I2/mult_134/U511/Z (XOR2_X1)                            0.08       3.49 r
   I2/mult_134/U523/Z (XOR2_X1)                            0.07       3.56 r
-  I2/mult_134/FS_1/A[32] (FPmul_DW01_add_2)               0.00       3.56 r
+  I2/mult_134/FS_1/A[32] (FPmul_inreg_DW01_add_2)         0.00       3.56 r
   I2/mult_134/FS_1/U101/ZN (AND2_X1)                      0.06       3.62 r
   I2/mult_134/FS_1/U95/ZN (AOI21_X1)                      0.03       3.65 f
   I2/mult_134/FS_1/U93/ZN (OAI21_X1)                      0.04       3.69 r
@@ -79,8 +80,8 @@ Wire Load Model Mode: top
   I2/mult_134/FS_1/U18/ZN (AOI21_X1)                      0.03       4.06 f
   I2/mult_134/FS_1/U46/ZN (OAI21_X1)                      0.04       4.10 r
   I2/mult_134/FS_1/U11/ZN (XNOR2_X1)                      0.06       4.16 r
-  I2/mult_134/FS_1/SUM[44] (FPmul_DW01_add_2)             0.00       4.16 r
-  I2/mult_134/PRODUCT[46] (FPmul_DW02_mult_0)             0.00       4.16 r
+  I2/mult_134/FS_1/SUM[44] (FPmul_inreg_DW01_add_2)       0.00       4.16 r
+  I2/mult_134/PRODUCT[46] (FPmul_inreg_DW02_mult_0)       0.00       4.16 r
   I2/SIG_in_reg[26]/D (DFF_X1)                            0.01       4.17 r
   data arrival time                                                  4.17
 

@@ -33,11 +33,8 @@ ENTITY stage2_finegrain IS
       isNaN_stage2    : OUT    std_logic;
       isZ_tab_stage2  : OUT    std_logic
    );
-
--- Declarations
-
 END stage2_finegrain ;
-
+-- Declarations
 --
 -- VHDL Architecture HAVOC.FPmul_stage2.struct
 --

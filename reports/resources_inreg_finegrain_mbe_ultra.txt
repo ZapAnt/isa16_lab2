@@ -1,9 +1,9 @@
  
 ****************************************
 Report : resources
-Design : FPmul_inreg_st2_finegrain_mbe
+Design : FPmul_inreg_finegrain_mbe
 Version: O-2018.06-SP4
-Date   : Wed Dec  9 18:15:28 2020
+Date   : Mon Dec 14 21:46:45 2020
 ****************************************
 
 
@@ -12,21 +12,20 @@ Resource Report for this hierarchy in file
 =============================================================================
 | Cell           | Module         | Parameters | Contained Operations       |
 =============================================================================
-| mult_x_19      | DW_mult_uns    | a_width=32 | I2/mult_134 (fpmul_stage2_struct.vhd:134) |
-  |                | b_width=32 |                            |
-| add_x_20       | DW01_add       | width=8    | I3/I9/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
-| add_x_22       | DW01_inc       | width=25   | I3/I11/add_45 (fpround_fpround.vhd:45) |
-| add_x_27       | DW01_add       | width=8    | I4/I1/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
-| DP_OP_46J1_122_7537             |            |                            |
-|                | DP_OP_46J1_122_7537 |       |                            |
+| add_x_19       | DW01_add       | width=64   | I2/I2combo/add_5990 (mbe.vhd:5990) |
+| add_x_37       | DW01_add       | width=8    | I3/I9/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
+| add_x_39       | DW01_inc       | width=25   | I3/I11/add_45 (fpround_fpround.vhd:45) |
+| add_x_44       | DW01_add       | width=8    | I4/I1/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
+| DP_OP_68J1_122_9736             |            |                            |
+|                | DP_OP_68J1_122_9736 |       |                            |
 =============================================================================
 
-Datapath Report for DP_OP_46J1_122_7537
+Datapath Report for DP_OP_68J1_122_9736
 ==============================================================================
 | Cell                 | Contained Operations                                |
 ==============================================================================
-| DP_OP_46J1_122_7537  | I2/add_126 (fpmul_stage2_struct.vhd:126)            |
-|                      | I2/add_126_2 (fpmul_stage2_struct.vhd:126)          |
+| DP_OP_68J1_122_9736  | I2/add_164 (fpmul_stage2_struct_finegrain_mbe.vhd:164) |
+                    | I2/add_164_2 (fpmul_stage2_struct_finegrain_mbe.vhd:164) |
 ==============================================================================
 
 ==============================================================================
@@ -35,7 +34,7 @@ Datapath Report for DP_OP_46J1_122_7537
 ==============================================================================
 | I1    | PI   | Unsigned | 8     |                                          |
 | I2    | PI   | Unsigned | 8     |                                          |
-| O1    | PO   | Unsigned | 8     | I1 + I2 + $unsigned(1'b1) (fpmul_stage2_struct.vhd:126) |
+| O1    | PO   | Unsigned | 8     | I1 + I2 + $unsigned(1'b1) (fpmul_stage2_struct_finegrain_mbe.vhd:164) |
 ==============================================================================
 
 
@@ -44,13 +43,12 @@ Implementation Report
 |                    |                  | Current            | Set            |
 | Cell               | Module           | Implementation     | Implementation |
 ===============================================================================
-| mult_x_19          | DW_mult_uns      | pparch (area,speed)                 |
-|                    |                  | mult_arch: benc_radix8              |
-| add_x_20           | DW01_add         | apparch (area)     |                |
-| add_x_22           | DW01_inc         | apparch (area,speed)                |
-| add_x_27           | DW01_add         | apparch (area)     |                |
-| DP_OP_46J1_122_7537                   |                    |                |
-|                    | DP_OP_46J1_122_7537 | str (area)      |                |
+| add_x_19           | DW01_add         | pparch (area,speed)                 |
+| add_x_37           | DW01_add         | apparch (area)     |                |
+| add_x_39           | DW01_inc         | apparch (area)     |                |
+| add_x_44           | DW01_add         | apparch (area)     |                |
+| DP_OP_68J1_122_9736                   |                    |                |
+|                    | DP_OP_68J1_122_9736 | str (area)      |                |
 ===============================================================================
 
 1

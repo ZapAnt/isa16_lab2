@@ -1,12 +1,12 @@
  
 ****************************************
 Report : resources
-Design : FPmul
+Design : FPmul_inreg
 Version: O-2018.06-SP4
-Date   : Thu Nov 19 21:39:19 2020
+Date   : Tue Dec 15 18:16:03 2020
 ****************************************
 
-Resource Sharing Report for design FPmul in file
+Resource Sharing Report for design FPmul_inreg in file
         ../src/multiplier/fpmul_stage1_struct.vhd
 
 ===============================================================================
@@ -28,7 +28,7 @@ Implementation Report
 | Cell               | Module           | Implementation     | Implementation |
 ===============================================================================
 | I2/mult_134        | DW02_mult        | pparch (area,speed) | pparch        |
-|                    |                  | mult_arch: benc_radix4              |
+|                    |                  | mult_arch: benc_radix8              |
 | add_1_root_I2/add_126_2               |                    |                |
 |                    | DW01_add         | rpl                |                |
 | I3/I11/add_45      | DW01_inc         | rpl                |                |

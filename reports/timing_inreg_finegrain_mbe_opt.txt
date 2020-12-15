@@ -1,0 +1,63 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : FPmul_inreg_finegrain_mbe
+Version: O-2018.06-SP4
+Date   : Mon Dec 14 17:27:54 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: MY_CLK_r_REG533_S1
+              (rising edge-triggered flip-flop clocked by MY_CLK)
+  Endpoint: I2/I2combo/add_5990/MY_CLK_r_REG527_S2
+            (rising edge-triggered flip-flop clocked by MY_CLK)
+  Path Group: MY_CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FPmul_inreg_finegrain_mbe
+                     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock MY_CLK (rise edge)                                0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  MY_CLK_r_REG533_S1/CK (DFF_X2)                          0.00       0.00 r
+  MY_CLK_r_REG533_S1/Q (DFF_X2)                           0.21       0.21 r
+  U6958/ZN (NAND2_X1)                                     0.05       0.27 f
+  U6788/Z (MUX2_X1)                                       0.07       0.34 f
+  U6957/ZN (OAI21_X1)                                     0.04       0.38 r
+  U9571/Z (XOR2_X1)                                       0.08       0.46 r
+  I2/I2combo/add_5990/A[2] (FPmul_inreg_finegrain_mbe_DW01_add_4)
+                                                          0.00       0.46 r
+  I2/I2combo/add_5990/U614/ZN (NAND2_X1)                  0.03       0.49 f
+  I2/I2combo/add_5990/U612/ZN (OAI21_X1)                  0.03       0.52 r
+  I2/I2combo/add_5990/U607/ZN (AOI21_X1)                  0.03       0.55 f
+  I2/I2combo/add_5990/U425/ZN (INV_X1)                    0.03       0.58 r
+  I2/I2combo/add_5990/U424/ZN (OAI21_X1)                  0.03       0.61 f
+  I2/I2combo/add_5990/U422/ZN (NAND2_X1)                  0.03       0.64 r
+  I2/I2combo/add_5990/U591/ZN (AOI21_X1)                  0.03       0.66 f
+  I2/I2combo/add_5990/MY_CLK_r_REG527_S2/D (DFF_X1)       0.01       0.67 f
+  data arrival time                                                  0.67
+
+  clock MY_CLK (rise edge)                                0.78       0.78
+  clock network delay (ideal)                             0.00       0.78
+  clock uncertainty                                      -0.07       0.71
+  I2/I2combo/add_5990/MY_CLK_r_REG527_S2/CK (DFF_X1)      0.00       0.71 r
+  library setup time                                     -0.04       0.67
+  data required time                                                 0.67
+  --------------------------------------------------------------------------
+  data required time                                                 0.67
+  data arrival time                                                 -0.67
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1

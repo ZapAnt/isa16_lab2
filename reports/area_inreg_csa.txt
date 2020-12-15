@@ -1,9 +1,9 @@
  
 ****************************************
 Report : area
-Design : FPmul
+Design : FPmul_inreg
 Version: O-2018.06-SP4
-Date   : Thu Nov 19 20:38:23 2020
+Date   : Tue Dec 15 14:48:19 2020
 ****************************************
 
 Library(s) Used:

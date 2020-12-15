@@ -93,27 +93,27 @@ ARCHITECTURE pipeline OF FPmul_inreg_finegrain_mbe IS
       isZ_tab_stage1  : OUT    std_logic
    );
    END COMPONENT;
-   COMPONENT FPmul_stage2
-   PORT (
+COMPONENT stage2_finegrain_mbe IS
+   PORT(
       A_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       A_SIG           : IN     std_logic_vector (31 DOWNTO 0);
       B_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       B_SIG           : IN     std_logic_vector (31 DOWNTO 0);
-      SIGN_out_stage1 : IN     std_logic ;
-      clk             : IN     std_logic ;
-      isINF_stage1    : IN     std_logic ;
-      isNaN_stage1    : IN     std_logic ;
-      isZ_tab_stage1  : IN     std_logic ;
+      SIGN_out_stage1 : IN     std_logic;
+      clk             : IN     std_logic;
+      isINF_stage1    : IN     std_logic;
+      isNaN_stage1    : IN     std_logic;
+      isZ_tab_stage1  : IN     std_logic;
       EXP_in          : OUT    std_logic_vector (7 DOWNTO 0);
-      EXP_neg_stage2  : OUT    std_logic ;
-      EXP_pos_stage2  : OUT    std_logic ;
-      SIGN_out_stage2 : OUT    std_logic ;
+      EXP_neg_stage2  : OUT    std_logic;
+      EXP_pos_stage2  : OUT    std_logic;
+      SIGN_out_stage2 : OUT    std_logic;
       SIG_in          : OUT    std_logic_vector (27 DOWNTO 0);
-      isINF_stage2    : OUT    std_logic ;
-      isNaN_stage2    : OUT    std_logic ;
+      isINF_stage2    : OUT    std_logic;
+      isNaN_stage2    : OUT    std_logic;
       isZ_tab_stage2  : OUT    std_logic
    );
-   END COMPONENT;
+END COMPONENT ;
    COMPONENT FPmul_stage3
    PORT (
       EXP_in          : IN     std_logic_vector (7 DOWNTO 0);
@@ -153,7 +153,7 @@ ARCHITECTURE pipeline OF FPmul_inreg_finegrain_mbe IS
    -- Optional embedded configurations
    -- pragma synthesis_off
    FOR ALL : FPmul_stage1 USE ENTITY work.FPmul_stage1;
-   FOR ALL : FPmul_stage2 USE ENTITY work.stage2_finegrain_mbe;
+ --  FOR ALL : FPmul_stage2 USE ENTITY work.FPmul_stage2;
    FOR ALL : FPmul_stage3 USE ENTITY work.FPmul_stage3;
    FOR ALL : FPmul_stage4 USE ENTITY work.FPmul_stage4;
    -- pragma synthesis_on
@@ -184,7 +184,7 @@ BEGIN
          isNaN_stage1    => isNaN_stage1,
          isZ_tab_stage1  => isZ_tab_stage1
       );
-   I2 : FPmul_stage2
+   I2 : stage2_finegrain_mbe
       PORT MAP (
          A_EXP           => A_EXP,
          A_SIG           => A_SIG,
