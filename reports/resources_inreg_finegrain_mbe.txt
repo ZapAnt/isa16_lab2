@@ -1,0 +1,36 @@
+ 
+****************************************
+Report : resources
+Design : FPmul_inreg_finegrain_mbe
+Version: O-2018.06-SP4
+Date   : Wed Dec 16 18:41:00 2020
+****************************************
+
+Resource Sharing Report for design FPmul_inreg_finegrain_mbe in file
+        ../src/multiplier/fpmul_stage1_struct.vhd
+
+===============================================================================
+|          |              |            | Contained     |                      |
+| Resource | Module       | Parameters | Resources     | Contained Operations |
+===============================================================================
+| r360     | DW01_add     | width=8    |               | add_1_root_I2/add_164_2 |
+| r362     | DW01_add     | width=64   |               | I2/I2combo/add_5990  |
+| r364     | DW01_add     | width=8    |               | I3/I9/add_41_aco     |
+| r366     | DW01_inc     | width=25   |               | I3/I11/add_45        |
+| r368     | DW01_add     | width=8    |               | I4/I1/add_41_aco     |
+===============================================================================
+
+
+Implementation Report
+===============================================================================
+|                    |                  | Current            | Set            |
+| Cell               | Module           | Implementation     | Implementation |
+===============================================================================
+| I2/I2combo/add_5990                   |                    |                |
+|                    | DW01_add         | pparch (area,speed)                 |
+| add_1_root_I2/add_164_2               |                    |                |
+|                    | DW01_add         | rpl                |                |
+| I3/I11/add_45      | DW01_inc         | rpl                |                |
+===============================================================================
+
+1

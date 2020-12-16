@@ -1,0 +1,114 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : FPmul_inreg_finegrain_mbe
+Version: O-2018.06-SP4
+Date   : Wed Dec 16 18:40:58 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: I1/B_SIG_reg[9]
+              (rising edge-triggered flip-flop clocked by MY_CLK)
+  Endpoint: I2/SIG_in_int_tmp_reg[27]
+            (rising edge-triggered flip-flop clocked by MY_CLK)
+  Path Group: MY_CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FPmul_inreg_finegrain_mbe
+                     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock MY_CLK (rise edge)                                0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  I1/B_SIG_reg[9]/CK (DFF_X1)                             0.00       0.00 r
+  I1/B_SIG_reg[9]/QN (DFF_X1)                             0.08       0.08 r
+  U5385/ZN (XNOR2_X1)                                     0.07       0.16 r
+  U5087/Z (BUF_X1)                                        0.05       0.20 r
+  U7103/ZN (NAND2_X1)                                     0.04       0.24 f
+  U7048/ZN (OAI22_X1)                                     0.05       0.29 r
+  U8031/ZN (INV_X1)                                       0.03       0.32 f
+  U6163/ZN (XNOR2_X1)                                     0.06       0.38 f
+  U6162/ZN (XNOR2_X1)                                     0.06       0.44 f
+  U5196/Z (XOR2_X1)                                       0.07       0.51 f
+  U5195/ZN (XNOR2_X1)                                     0.06       0.57 f
+  U5552/ZN (XNOR2_X1)                                     0.06       0.63 f
+  U5551/ZN (XNOR2_X1)                                     0.06       0.69 f
+  I2/I2combo/add_5990/A[12] (FPmul_inreg_finegrain_mbe_DW01_add_4)
+                                                          0.00       0.69 f
+  I2/I2combo/add_5990/U396/ZN (NOR2_X1)                   0.04       0.73 r
+  I2/I2combo/add_5990/U452/ZN (OAI21_X1)                  0.03       0.77 f
+  I2/I2combo/add_5990/U394/ZN (AOI21_X1)                  0.05       0.82 r
+  I2/I2combo/add_5990/U450/ZN (OAI21_X1)                  0.03       0.85 f
+  I2/I2combo/add_5990/U441/ZN (AOI21_X1)                  0.04       0.89 r
+  I2/I2combo/add_5990/U449/ZN (OAI21_X1)                  0.03       0.92 f
+  I2/I2combo/add_5990/U427/ZN (AOI21_X1)                  0.04       0.95 r
+  I2/I2combo/add_5990/U428/ZN (OAI21_X1)                  0.03       0.98 f
+  I2/I2combo/add_5990/U425/ZN (AOI21_X1)                  0.04       1.02 r
+  I2/I2combo/add_5990/U426/ZN (OAI21_X1)                  0.03       1.05 f
+  I2/I2combo/add_5990/U424/ZN (AOI21_X1)                  0.04       1.09 r
+  I2/I2combo/add_5990/U455/ZN (OAI21_X1)                  0.03       1.12 f
+  I2/I2combo/add_5990/U284/ZN (AOI21_X1)                  0.04       1.17 r
+  I2/I2combo/add_5990/U456/ZN (OAI21_X1)                  0.03       1.20 f
+  I2/I2combo/add_5990/U274/ZN (AOI21_X1)                  0.04       1.24 r
+  I2/I2combo/add_5990/U448/ZN (OAI21_X1)                  0.03       1.27 f
+  I2/I2combo/add_5990/U269/ZN (AOI21_X1)                  0.04       1.31 r
+  I2/I2combo/add_5990/U435/ZN (OAI21_X1)                  0.03       1.35 f
+  I2/I2combo/add_5990/U275/ZN (AOI21_X1)                  0.04       1.39 r
+  I2/I2combo/add_5990/U429/ZN (OAI21_X1)                  0.03       1.42 f
+  I2/I2combo/add_5990/U271/ZN (AOI21_X1)                  0.04       1.46 r
+  I2/I2combo/add_5990/U454/ZN (OAI21_X1)                  0.03       1.50 f
+  I2/I2combo/add_5990/U277/ZN (AOI21_X1)                  0.04       1.54 r
+  I2/I2combo/add_5990/U446/ZN (OAI21_X1)                  0.03       1.57 f
+  I2/I2combo/add_5990/U285/ZN (AOI21_X1)                  0.04       1.61 r
+  I2/I2combo/add_5990/U437/ZN (OAI21_X1)                  0.04       1.65 f
+  I2/I2combo/add_5990/U265/ZN (NAND2_X1)                  0.04       1.69 r
+  I2/I2combo/add_5990/U267/ZN (NAND3_X1)                  0.04       1.73 f
+  I2/I2combo/add_5990/U249/ZN (NAND2_X1)                  0.03       1.77 r
+  I2/I2combo/add_5990/U252/ZN (NAND3_X1)                  0.04       1.80 f
+  I2/I2combo/add_5990/U401/ZN (NAND2_X1)                  0.04       1.84 r
+  I2/I2combo/add_5990/U245/ZN (NAND3_X1)                  0.04       1.88 f
+  I2/I2combo/add_5990/U406/ZN (NAND2_X1)                  0.04       1.91 r
+  I2/I2combo/add_5990/U207/ZN (NAND3_X1)                  0.04       1.96 f
+  I2/I2combo/add_5990/U213/ZN (NAND2_X1)                  0.04       1.99 r
+  I2/I2combo/add_5990/U210/ZN (NAND3_X1)                  0.04       2.03 f
+  I2/I2combo/add_5990/U413/ZN (NAND2_X1)                  0.04       2.06 r
+  I2/I2combo/add_5990/U414/ZN (NAND3_X1)                  0.04       2.10 f
+  I2/I2combo/add_5990/U418/ZN (NAND2_X1)                  0.04       2.14 r
+  I2/I2combo/add_5990/U420/ZN (NAND3_X1)                  0.04       2.18 f
+  I2/I2combo/add_5990/U256/ZN (NAND2_X1)                  0.04       2.22 r
+  I2/I2combo/add_5990/U205/ZN (NAND3_X1)                  0.04       2.26 f
+  I2/I2combo/add_5990/U219/ZN (NAND2_X1)                  0.04       2.30 r
+  I2/I2combo/add_5990/U222/ZN (NAND3_X1)                  0.04       2.33 f
+  I2/I2combo/add_5990/U229/ZN (NAND2_X1)                  0.04       2.37 r
+  I2/I2combo/add_5990/U231/ZN (NAND3_X1)                  0.04       2.41 f
+  I2/I2combo/add_5990/U235/ZN (NAND2_X1)                  0.03       2.44 r
+  I2/I2combo/add_5990/U237/ZN (NAND3_X1)                  0.03       2.48 f
+  I2/I2combo/add_5990/U327/ZN (XNOR2_X1)                  0.05       2.53 f
+  I2/I2combo/add_5990/SUM[47] (FPmul_inreg_finegrain_mbe_DW01_add_4)
+                                                          0.00       2.53 f
+  I2/SIG_in_int_tmp_reg[27]/D (DFF_X1)                    0.01       2.54 f
+  data arrival time                                                  2.54
+
+  clock MY_CLK (rise edge)                                2.65       2.65
+  clock network delay (ideal)                             0.00       2.65
+  clock uncertainty                                      -0.07       2.58
+  I2/SIG_in_int_tmp_reg[27]/CK (DFF_X1)                   0.00       2.58 r
+  library setup time                                     -0.04       2.54
+  data required time                                                 2.54
+  --------------------------------------------------------------------------
+  data required time                                                 2.54
+  data arrival time                                                 -2.54
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
