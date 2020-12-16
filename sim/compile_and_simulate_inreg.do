@@ -1,5 +1,3 @@
-# cd "C:/Users/Anto/Documents/GitHub/isa16_lab2/sim"
-
 vlib work
 vcom -work work {../src/common/fpnormalize_fpnormalize.vhd}
 vcom -work work {../src/common/fpround_fpround.vhd}

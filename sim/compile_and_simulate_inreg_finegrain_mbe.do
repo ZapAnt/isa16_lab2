@@ -1,5 +1,3 @@
-# cd "C:/Users/Anto/Documents/GitHub/isa16_lab2/sim"
-
 vlib work
 vcom -work work {../src/half_adder.vhd}
 vcom -work work {../src/full_adder.vhd}
